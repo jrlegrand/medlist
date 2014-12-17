@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html ng-app="medlistApp" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Medlist</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<!-- Le styles -->
+	<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
+	<link href="css/font-awesome/font-awesome.min.css" rel="stylesheet">
+	<link href="css/medlist.css" rel="stylesheet">
+
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	<script src="../assets/js/html5shiv.js"></script>
+	<![endif]-->
+
+	<!-- Fav and touch icons -->
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+	<link rel="shortcut icon" href="../assets/ico/favicon.png">
+
+	<script src="js/jquery/jquery.min.js"></script>
+	<script src="js/bootstrap/bootstrap.min.js"></script>
+	<script src="js/angular/angular.min.js"></script>
+	<script src="js/angular-ui/angular-ui.min.js"></script>
+	<script src="js/meds.js"></script>
+</head>
+
+<body>
+
+	<div ng-controller="MedlistController" class="container-fluid" id="app-container med-initiate">
+			<div class="col-md-4 col-xs-3"></div>
+			<div class="well col-md-4 col-xs-6">
+				<div id="med-brand">
+					Medication List
+				</div>
+					<form ng-submit="loadList(medlistId)">
+						<input type="text" id="med-initiate-form" class="form-control input-lg" ng-model="medlistId" placeholder="Enter or scan code" autofocus="autofocus">
+						<button type="submit" class="btn btn-success" id="med-input-button"><i class="fa fa-arrow-right"></i></button>
+					</form>
+
+				<div id="frontpage-or"><h3>OR</h3></div>
+				<div>
+					<button type="button" class="btn btn-default btn-lg btn-block" ng-click="loadList()">Create New List</button>
+
+				</div>
+			</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<html lang="en">
+<script src="js/jquery/jquery.min.js"></script>
+<script>
+	var url = "http://sunriselatestga.unitysandbox.com";
+	
+	$.ajax({
+		type: "POST",
+		url: url + "/Unity/UnityService.svc/json/GetToken",
+		contentType: "application/json",
+		data: {
+			"Username": "Sl3utH",
+			"Password": "5aNdB0xSl3utH"
+		},
+		error: function (jqXHR, textStatus, message) {
+			console.log("MESSAGE: " + message);
+		},
+		success: function (data, textStatus, jqXHR) {
+			console.log(data);
+		}
+	});
+</script>
+<body>
+  <div id="medlist">
+    
+  </div>
+</body>
+</html>

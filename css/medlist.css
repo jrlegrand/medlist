@@ -1,0 +1,238 @@
+/* INDEX STYLES */
+/* ~~~~~~~~~~~~ */
+
+#med-initiate {
+	margin-top: 60px;
+}
+
+#frontpage-or {
+	text-align: center;
+	margin-bottom: 15px;
+}
+
+.med-alert {
+	z-index: 9999;
+}
+
+/* LIST STYLES */
+/* ~~~~~~~~~~~ */
+
+body {
+	padding: 10px 50px;
+	background: #e4e4e4;
+	font-family: 'Open Sans', Arial, sans-serif;
+	/*background-image: url('../img/foil.png');*/
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+#app-container, #med-toolbar {
+	max-width: 1280px;
+}
+
+#med-navbar {
+	margin-bottom: 20px;
+	padding-bottom: 15px;
+}
+
+#med-statusbar {
+	/* yellow = fcf8e3 */
+	/* green = dff0d8 */
+	/* blue = d9edf7 */
+	background: #fcf8e3;
+	padding: 5px;
+	font-size: 12px;
+	border: 1px solid #faebcc;
+	color: #8a6d3b;
+}
+
+#med-user a {
+	color: #8a6d3b;
+}
+
+#med-toolbar {
+	margin-bottom: 10px;
+}
+
+#med-toolbar-buttons {
+	margin-top: 10px;
+}
+
+#med-brand {
+	font-size: 30px;
+	font-weight: 700;
+	margin-top: 5px;
+	color: #333;
+}
+
+#medlist-id {
+	font-size: 25px;
+	margin-top: 10px;
+}
+
+#medlist-qr {
+	margin: 0;
+	padding: 0;
+	padding-bottom: 5px
+}
+
+#med-input-form {
+}
+
+#med-input-button {
+	float: right;
+	position: relative;
+	top: -40px;
+	right: 7px;
+}
+
+.med-header {
+	font-size: 30px;
+}
+
+.google-now {
+	/* GOOGLE NOW STYLES */
+	/* ~~~~~~~~~~~~~~~~~ */
+	background: #fefefe;
+	border-left: 1px solid #f5f5f5;
+	border-top: 1px solid #f4f4f4;
+	border-right: 1px solid #fafafb;
+	border-bottom: 1px solid #e8e8e8;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	-moz-box-shadow: 0 2px 3px rgba(0,0,0,.05);
+	-webkit-box-shadow: 0 2px 3px rgba(0,0,0,.05);
+	box-shadow: 0 2px 3px rgba(0,0,0,.05);
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	backface-visibility: hidden;
+	box-shadow: rgba(0, 0, 0, 0.0470588) 0px 2px 3px 0px;
+	/* END GOOGLE NOW STYLES */
+}
+
+.med-item {
+	z-index: -999;
+	margin: 0 0 20px 0;
+}
+
+.med-item-inner {
+	padding: 20px 20px 0 20px;
+}
+
+.med-ingredient {
+	font-size: 30px;
+	
+	/* Padding for the close button */
+	padding-right: 10px;
+}
+
+.med-sig {
+	color: #333;
+	font-size: 24px;
+	margin-top: 10px;
+}
+
+.med-indication {
+}
+
+.med-notes {
+	margin-top: 15px;
+}
+
+.med-indication, .med-notes ul li {
+	color: #333;
+	font-size: 20px;
+	margin-top: 5px;
+}
+
+.med-additional {
+	margin-top: 10px;
+	margin-left: 20px;
+}
+
+.med-history {
+	/* yellow = fcf8e3 */
+	/* green = dff0d8 */
+	background: #fcf8e3;
+	border: 1px solid #faebcc;
+	color: #8a6d3b;
+	padding: 5px 20px;
+	margin-top: 20px;
+	text-align: right;
+	font-size: 12px;
+}
+
+.med-history .provider {
+	font-weight: bold;
+}
+
+
+.edit, .save {
+	font-size: 18px;
+	vertical-align: middle;
+}
+
+.med-remove a
+{
+	font-size: 20px;
+	color: #333;
+}
+
+.med-note-remove a {
+	color: #333;
+}
+
+.med-remove a:hover,
+.med-note-remove a:hover
+{
+	color: #76200d;
+}
+
+.edit,
+.med-remove,
+.med-note-remove
+{
+	display : none;
+}
+
+.med-ingredient:hover .edit,
+.med-sig:hover .edit,
+.med-indication:hover .edit,
+.med-note:hover .edit,
+.med-item:hover .med-remove
+{
+	display: inline-block;
+}
+
+.med-note-item:hover .med-note-remove {
+	display: inline-block;
+	padding-right: 1px;
+}
+
+.med-note-item:hover .med-note-icon {
+	display: none;
+}
+
+/* EDIT-IN-PLACE STYLES */
+
+.edit-in-place input {
+	display: none;
+}
+
+.edit-in-place .save  {
+	display: none;
+}
+
+.edit-in-place.active span,
+.edit-in-place.active .edit {
+    display: none;
+}
+.edit-in-place.active input,
+.edit-in-place.active .save  {
+    display: inline-block;
+}

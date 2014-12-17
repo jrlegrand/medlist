@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html xmlns:ng="http://angularjs.org" id="ng-app" ng-app="medlistApp" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Chart My Meds</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	
+	<!-- Le styles -->
+	<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
+	<link href="css/font-awesome/font-awesome.min.css" rel="stylesheet">
+	<link href="css/medlist.css" rel="stylesheet">
+
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	<script src="../assets/js/html5shiv.js"></script>
+	<![endif]-->
+	
+	<!-- Angular IE 8 shim -->
+    <!--[if lte IE 8]>
+      <script>
+        document.createElement('ng-include');
+        document.createElement('ng-pluralize');
+        document.createElement('ng-view');
+
+        // Optionally these for CSS
+        document.createElement('ng:include');
+        document.createElement('ng:pluralize');
+        document.createElement('ng:view');
+      </script>
+    <![endif]-->
+
+	<!-- Fav and touch icons -->
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+	<link rel="shortcut icon" href="../assets/ico/favicon.png">
+
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+	
+	<script src="js/jquery/jquery-2.min.js"></script>
+	<script src="js/bootstrap/bootstrap.min.js"></script>
+	<script src="js/angular/angular.min.js"></script>
+	<script src="js/angular/angular-resource.min.js"></script>
+	<script src="js/angular-ui/angular-ui.min.js"></script>
+	<script src="js/meds.js"></script>
+</head>
+
+<body>
+	<div class="container-fluid" id="container">
+		<div ng-controller="MedlistController" class="row" id="app-container">
+
+			<!-- MED LIST -->
+			<div id="med-list" class="col-md-8 col-xs-12">
+
+				<!-- NAVBAR -->
+				<div id="med-navbar" class="container-fluid google-now hidden-print">
+					<div id="med-statusbar" class="row">
+												<div class="col-md-6 col-xs-8" id="med-brand">
+							<span>
+								Chart My Meds
+							</span>
+						</div>
+
+						<div class="col-xs-12">
+							<strong ng-show="status == 'creating'">Creating new Med Chart...</strong>
+							<strong ng-show="status == 'editing'">Editing Med Chart...</strong>
+							<strong ng-show="status == 'saving'">Saving Med Chart... <i class="fa fa-circle-o-notch fa-spin"></i></strong>
+							<strong ng-show="status == 'saved'">Med Chart has been saved...</strong>
+							<span class="pull-right" id="med-user">
+								<strong><a href="">About</a></strong> · 
+								<strong><a href="">Contact</a></strong>								
+								<span ng-show="user">
+									 · <strong><i class="fa fa-user"></i> <a href="">{{user}}</a> <i class="fa fa-caret-down"></i></strong>
+								</span>
+							</span>
+						</div>
+					</div>
+
+					<!-- MED LIST START FORM -->
+					<div class="row" style="margin-top: 25px;" id="med-start" ng-hide="status">
+						<div class="col-xs-5">
+								<button type="button" class="btn btn-default btn-lg" ng-click="newMedlist()">Create a new Med Chart</button>
+					
+						</div>
+						<div class="col-xs-2" style="text-align: left; font-size: 30px;">
+							<strong>OR</strong>
+						</div>
+						<div class="col-xs-5">
+							<form role="form" ng-submit="loadMedlist()">
+								<div class="form-group">
+									<input type="text" class="form-control input-lg" ng-model="medlistIdInput" placeholder="Enter Med Chart ID">
+								</div>
+							</form>								
+					
+						</div>
+					</div>
+					<!-- END MED LIST START FORM -->
+					
+					<!-- MED LIST TOOLBAR -->
+					<div id="med-toolbar" class="row" ng-show="status">
+						<div class="col-sm-9 col-xs-12" id="med-toolbar-buttons">
+							<div class="btn-group" role="group" aria-label="...">
+								<button type="button" class="btn btn-default" ng-click="newMedlist()">New</button>
+								<button type="button" class="btn btn-default" onclick="window.location.assign('index.html')">Load</button>
+								<button type="button" class="btn btn-default" ng-click="saveMedlist(22222222)">Save</button>
+								<button type="button" class="btn btn-default" onclick="window.print();">Print</button>
+								<!--<button type="button" class="btn btn-default" ng-click="editMedlist();">Edit</button>-->
+							</div>
+						</div>
+
+						<!-- BRAND / ID / QR CODE 
+						<div class="col-md-6 col-xs-8" id="med-brand">
+							<span>
+								Medication List
+							</span>
+						</div>
+						 END BRAND / ID / QR CODE -->
+							
+						<div class="col-sm-3 col-xs-12">
+							<span class="pull-right" id="medlist-id" ng-show="medlistId">
+								<img src="img/qr.png" id="medlist-qr" width="20">
+								{{medlistId}}
+							</span>
+						</div>
+					</div>
+					<!-- END MED LIST TOOLBAR -->
+						
+					<!-- NEW MED INPUT TYPEAHEAD -->
+					<div id="med-input-form" class="row" ng-show="status">
+						<div class="col-xs-12">
+							<input type="text" class="form-control input-lg" typeahead-on-select="addMed()" ng-model="medInput" placeholder="Add new medication here" typeahead="med as med.name for med in rxnormMeds | filter:{name:$viewValue}" typeahead-min-length="3">
+						</div>
+					</div>
+					<!-- END NEW MED INPUT TYPEAHEAD -->
+				</div>
+				<!-- END NAVBAR -->
+
+				<!-- MED USER IDENTITY -->
+				<div class="alert med-alert alert-info hidden hidden-print" id="med-user-identity">
+					<div class="med-item-inner">
+						<div class="med-header">Before saving your Med Chart</div>
+						<br>
+						<p>Before saving your Med Chart, please select who is editing:<p>
+						<div id="med-user-identity-buttons">
+							<div class="btn-group" role="group" aria-label="...">
+								<button type="button" class="btn btn-default" ng-click="setMedlistUser('PATIENT')">Patient</button>
+								<button type="button" class="btn btn-default" ng-click="setMedlistUser('FAMILY')">Family</button>
+								<button type="button" class="btn btn-default" ng-click="setMedlistUser('PROVIDER')">Provider</button>
+							</div>
+						</div>
+						<br>
+						<p>Your Med Chart contains absolutely no individually identifiable protected health information (PHI) <a href="http://www.hipaa.com/2009/09/hipaa-protected-health-information-what-does-phi-include/" target="_blank" title="What does this mean?"><i class="fa fa-question-circle"></i></a> so you can be confident your privacy is secure.</p>
+					</div>
+				</div>
+				<!-- END MED USER IDENTITY -->
+
+				<!-- MED SAVED ALERT -->
+				<div class="alert alert-success hidden-print" ng-show="status == 'saved'" id="med-chart-saved">
+					<div class="med-item-inner">
+					<div class="med-header">You've saved your new Med Chart!</div>
+					<br>
+					
+					
+					<p>Your Med Chart ID is: </p>
+					<h3 style="margin-top:0;">{{medlistId}}</h3>
+					
+					<p>Keep this number with your health records so you can easily reference your Med Chart.</p>
+
+					<!--
+
+					<p>Your Med Chart contains absolutely no individually identifiable protected health information (PHI) <a href="http://www.hipaa.com/2009/09/hipaa-protected-health-information-what-does-phi-include/" target="_blank" title="What does this mean?"><i class="fa fa-question-circle"></i></a> so you can be confident your privacy is secure.</p>					
+					<small><strong>RECOMMENDED</strong></small>
+					<p>Email yourself a link to your Med Chart so you won't forget where to find it.</p>
+					
+					<input type="text" class="form-control input" placeholder="Enter email address here">
+					<p><i>Your email address will not be stored.</i></p>
+
+					<small><strong>RECOMMENDED</strong></small>
+					<p>Bookmark this page so you can easily access your Med Chart from your browser.</p>
+					
+					-->
+					<p>Your Med Chart is located at:</p>
+					
+					<h3 style="margin-top:0;">chartmymeds.com/{{medlistId}}</h3>
+					
+					<p>After you are finished updating your Med Chart, don't forget to print a copy for your health records.</p>
+					
+					
+					</div>
+				</div>				
+				<!-- END MED SAVED ALERT -->
+				
+				<!-- MED ITEM REPEAT -->
+				<div class="med-item {{med.indication}} google-now" ng-repeat="med in meds">
+					<div class="med-item-inner">
+						<div class="med-remove pull-right"><a href="javascript:void(0);" title="Remove medication" ng-click="removeMed($index)"><i class="fa fa-close"></i></a></div>
+						<div class="med-ingredient">{{med.name}}</div>
+						<div med-sig></div>
+						<div class="med-additional">
+							<div med-indication></div>
+							<!--<div med-notes></div>-->
+						</div>
+						<div class="med-rxcui hidden"><br><b>RXCUI:</b> {{med.rxnorm_id}}</div>
+					</div>
+					
+					<div class="med-history">
+						Added <span ng-show="med.created_by">by <span class="provider"> {{med.created_by}}</span></span> on {{med.date_created}}
+					</div>
+				</div>
+				<!-- END MED ITEM REPEAT -->
+
+				<div class="alert alert-warning hidden-print" ng-show="meds.length == 0 && status" id="med-chart-started">
+					<div class="med-item-inner">
+						<div class="med-header">Get started creating your Med Chart</div>
+						<br>
+						<p>Start by entering your medications in the field above.</p>
+						
+						<small><strong>HINT</strong></small>
+						<p>You just need to type the first few letters of the medication name and then choose from the dropdown list.</p>
+						<p>Press enter or click the medication to add it to the list!</p>
+						
+					</div>
+				</div>
+			</div>
+			<!-- END MED LIST -->
+			
+			<!-- AD SPACE -->
+			<div class="col-md-4 col-xs-12 hidden-print">
+				<!--
+				<img src="img/ad300250.jpg"/><br/><br/>
+				<img src="img/ad300600.jpg"/><br/><br/>
+				-->
+				<!-- FORMATTED RAW JSON DATA -->
+				<div class=""><pre>MEDS{{meds | json}}</pre></div>
+				<div class=""><pre>DELETED MEDS{{deletedMeds | json}}</pre></div>
+								
+			<!--
+				<div class="col-md-12 col-sm-6">
+					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<ins class="adsbygoogle"
+						 style="display:inline-block;width:300px;height:250px"
+						 data-ad-client="ca-pub-7122202546588715"
+						 data-ad-slot="3873659281"></ins>
+					<script>
+					(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+					<br><br>
+				</div>
+				<div class="col-md-12 col-sm-6">
+					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<ins class="adsbygoogle"
+						 style="display:inline-block;width:300px;height:600px"
+						 data-ad-client="ca-pub-7122202546588715"
+						 data-ad-slot="5350392486"></ins>
+					<script>
+					(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+			
+				</div>
+			-->
+			</div>
+		</div>
+	</div>
+	<div ng-controller="PatientController">
+		<div class="pull-left" id="patient-list">
+		</div>
+	</div>
+	
+	
+</body>
+</html>
+
+<!-- EXTRA TOOLBAR BUTTONS
+<form ng-submit="loadMedlist()" style="margin-bottom: 10px; padding-left: 0" class="col-md-4">
+	<input type="text" class="form-control input-lg" placeholder="Load Medication List" ng-model="medlistIdInput">
+</form>
+<div class="btn-group btn-group-lg">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+	Sort <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+	<li><a href="javascript:void(0);" ng-click="sortMed('name')">Name</a></li>
+	<li><a href="javascript:void(0);" ng-click="sortMed('indication')">Indication</a></li>
+	<li><a href="javascript:void(0);" ng-click="sortMed('date_created')">Date Modified</a></li>
+  </ul>
+</div>							
+<div class="btn-group btn-group-lg">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+	View <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+	<li><a href="javascript:void(0);" ng-click="">Default</a></li>
+	<li><a href="javascript:void(0);" ng-click="">Clinical</a></li>
+  </ul>
+</div>
+<div class="btn-group btn-group-lg">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+	Import <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+	<li><a href="javascript:void(0);" ng-click="importMeds()">Allscripts</a></li>
+	<li><a href="javascript:void(0);" ng-click="">Blue Button</a></li>
+  </ul>
+</div>
+<div class="btn-group btn-group-lg">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+	Share <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+	<li><a href="javascript:void(0);" ng-click="">Email</a></li>
+	<li><a href="javascript:void(0);" ng-click="">Text message</a></li>
+  </ul>
+</div>
+-->
