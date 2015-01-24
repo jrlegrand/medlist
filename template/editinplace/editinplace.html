@@ -1,0 +1,10 @@
+<span class="edit-in-place" ng-class="{active: editing}">
+	<span ng-hide="value || editing">
+		<a href="javascript:void(0);" ng-bind="defaultText" ng-click="edit()"></a>
+	</span>
+	<span ng-bind="value" ng-click="edit()" ng-blur="done()" ng-show="value && !editing"></span>
+	<a href="javascript:void(0);" class="edit" ng-click="edit()" ng-show="value && !editing">edit</a> 
+	
+	<input class="form-control input input-lg" ng-model="value" ng-blur="done()" ng-show="editing" ng-keydown="$event.keyCode == 13 && done()" focus-me="editing"></input> 
+	<a href="javascript:void(0);" class="save" ng-click="done()" ng-show="editing">save</a>
+</span>

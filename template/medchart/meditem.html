@@ -1,0 +1,27 @@
+<!-- MED ITEM REPEAT -->
+<div class="med-item {{med.indication}} google-now" ng-repeat="med in meds">
+	<div class="med-item-inner">
+		<div class="med-remove pull-right"><a href="javascript:void(0);" title="Remove medication" ng-click="removeMed($index)"><i class="fa fa-close"></i></a></div>
+		<!-- MED INGREDIENT -->
+		<div class="med-ingredient">
+			<span ng-bind="med.name"></span>
+		</div>
+		<!-- MED SIG -->
+		<div class="med-sig">
+			<edit-in-place value="med.sig" default-text="'Add directions'"></edit-in-place>
+		</div>
+		<!-- MED INDICATION AND NOTES -->
+		<div class="med-additional">
+			<div class="med-indication">
+				<span ng-show="med.indication">For </span><edit-in-place value="med.indication" default-text="'Add indication'"></edit-in-place>
+			</div>
+			<!--<div med-notes></div>-->
+		</div>
+		<div class="med-rxcui hidden"><br><b>RXCUI:</b> {{med.rxnorm_id}}</div>
+	</div>
+	
+	<div class="med-history">
+		Added <span ng-show="med.created_by">by <span class="provider"> {{med.created_by}}</span></span> on {{med.date_created | date: 'MM/dd/yyyy hh:mm:ss a'}}
+	</div>
+</div>
+<!-- END MED ITEM REPEAT -->

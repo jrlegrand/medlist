@@ -14,7 +14,7 @@ $config = [
 			'rules' => [
 				[
 					'class' => 'yii\rest\UrlRule',
-					'controller' => ['med', 'medlist'],
+					'controller' => ['med', 'medchart'],
 				]
 			],
 		],

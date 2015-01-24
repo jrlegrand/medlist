@@ -1,0 +1,19 @@
+<!-- MED LIST START FORM -->
+<div class="row" style="margin-top: 25px;" id="med-start" ng-hide="status">
+	<div class="col-xs-5">
+			<button type="button" class="btn btn-default btn-lg" ng-click="newMedchart()">Create a new Med Chart</button>
+
+	</div>
+	<div class="col-xs-2" style="text-align: left; font-size: 30px;">
+		<strong>OR</strong>
+	</div>
+	<div class="col-xs-5">
+		<form role="form" ng-submit="loadMedchart()">
+			<div class="form-group">
+				<input type="text" class="form-control input-lg" ng-model="medchartIdInput" placeholder="Enter Med Chart ID">
+			</div>
+		</form>								
+
+	</div>
+</div>
+<!-- END MED LIST START FORM -->

@@ -1,0 +1,72 @@
+<!-- MED USER IDENTITY -->
+<div class="alert med-alert alert-info hidden hidden-print" id="med-user-identity">
+	<div class="med-item-inner">
+		<div class="med-header">Before saving your Med Chart</div>
+		<br>
+		<p>Before saving your Med Chart, please select who is editing:<p>
+		<div id="med-user-identity-buttons">
+			<div class="btn-group" role="group" aria-label="...">
+				<button type="button" class="btn btn-default" ng-click="setMedchartUser('PATIENT')">Patient</button>
+				<button type="button" class="btn btn-default" ng-click="setMedchartUser('FAMILY')">Family</button>
+				<button type="button" class="btn btn-default" ng-click="setMedchartUser('PROVIDER')">Provider</button>
+			</div>
+		</div>
+		<br>
+		<p>Your Med Chart contains absolutely no individually identifiable protected health information (PHI) <a href="http://www.hipaa.com/2009/09/hipaa-protected-health-information-what-does-phi-include/" target="_blank" title="What does this mean?"><i class="fa fa-question-circle"></i></a> so you can be confident your privacy is secure.</p>
+	</div>
+</div>
+<!-- END MED USER IDENTITY -->
+
+<!-- MED SAVED ALERT -->
+<div class="alert alert-success hidden-print" ng-show="status == 'saved'" id="med-chart-saved">
+	<div class="med-item-inner">
+	<div class="med-header">You've saved your new Med Chart!</div>
+	<br>
+	
+	
+	<p>Your Med Chart ID is: </p>
+	<h3 style="margin-top:0;">{{medchartId}}</h3>
+	
+	<p>Keep this number with your health records so you can easily reference your Med Chart.</p>
+
+	<!--
+
+	<p>Your Med Chart contains absolutely no individually identifiable protected health information (PHI) <a href="http://www.hipaa.com/2009/09/hipaa-protected-health-information-what-does-phi-include/" target="_blank" title="What does this mean?"><i class="fa fa-question-circle"></i></a> so you can be confident your privacy is secure.</p>					
+	<small><strong>RECOMMENDED</strong></small>
+	<p>Email yourself a link to your Med Chart so you won't forget where to find it.</p>
+	
+	<input type="text" class="form-control input" placeholder="Enter email address here">
+	<p><i>Your email address will not be stored.</i></p>
+
+	<small><strong>RECOMMENDED</strong></small>
+	<p>Bookmark this page so you can easily access your Med Chart from your browser.</p>
+	
+	<p>Your Med Chart is located at:</p>
+	
+	<h3 style="margin-top:0;">chartmymeds.com/{{medchartId}}</h3>
+	
+	<p>After you are finished updating your Med Chart, don't forget to print a copy for your health records.</p>
+	-->
+
+	</div>
+</div>				
+<!-- END MED SAVED ALERT -->
+
+<!-- MED ITEM REPEAT -->
+<div med-item></div>
+<!-- END MED ITEM REPEAT -->
+
+<!-- UI HINT -->
+<div class="alert alert-warning hidden-print" ng-show="meds.length == 0 && status" id="med-chart-started">
+	<div class="med-item-inner">
+		<div class="med-header">Get started creating your Med Chart</div>
+		<br>
+		<p>Start by entering your medications in the field above.</p>
+		
+		<small><strong>HINT</strong></small>
+		<p>You just need to type the first few letters of the medication name and then choose from the dropdown list.</p>
+		<p>Press enter or click the medication to add it to the list!</p>
+		
+	</div>
+</div>
+<!-- END UI HINT -->

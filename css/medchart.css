@@ -21,7 +21,7 @@ body {
 	padding: 10px 50px;
 	background: #e4e4e4;
 	font-family: 'Open Sans', Arial, sans-serif;
-	/*background-image: url('../img/foil.png');*/
+	background-image: url('../img/foil.png');
 }
 
 ul {
@@ -34,12 +34,53 @@ ul {
 	max-width: 1280px;
 }
 
-#med-navbar {
+#med-menu {
 	margin-bottom: 20px;
-	padding-bottom: 15px;
 }
 
-#med-statusbar {
+.med-menu-item {
+	text-align: center;
+	padding: 15px;
+	font-size: 18px;
+	background: #eee;
+}
+
+.med-menu-item:hover {
+	background: #fcf8e3;
+	cursor: pointer;
+}
+
+.sub-menu-one {
+	text-align: center;
+	font-size: 16px;
+	background: #333;
+	color: #fff;
+	padding: 10px 19px;
+}
+
+.sub-menu-one:hover {
+	background: #aaa;
+	cursor: pointer;
+}
+
+.sub-menu-two {
+	text-align: center;
+	font-size: 16px;
+	background: #d9edf7;
+	color: #000;
+	padding: 10px 19px;
+}
+
+.sub-menu-two:hover {
+	background: #aaa;
+	cursor: pointer;
+}
+
+.sub-menu-one a {
+	color: #fff;
+}
+
+#med-navbar {
 	/* yellow = fcf8e3 */
 	/* green = dff0d8 */
 	/* blue = d9edf7 */
@@ -47,6 +88,11 @@ ul {
 	padding: 5px;
 	font-size: 12px;
 	border: 1px solid #faebcc;
+	/*color: #8a6d3b;*/
+	margin-bottom: 20px;
+}
+
+#med-navbar-links a {
 	color: #8a6d3b;
 }
 
@@ -54,40 +100,31 @@ ul {
 	color: #8a6d3b;
 }
 
-#med-toolbar {
-	margin-bottom: 10px;
-}
-
 #med-toolbar-buttons {
 	margin-top: 10px;
 }
 
 #med-brand {
-	font-size: 30px;
-	font-weight: 700;
-	margin-top: 5px;
+	font-family: 'Alegreya Sans', sans-serif;
+	font-size: 38px;
+	font-weight: 900;
 	color: #333;
 }
 
-#medlist-id {
+#medchart-id {
 	font-size: 25px;
 	margin-top: 10px;
+	margin-left: 10px;
 }
 
-#medlist-qr {
+#medchart-qr {
 	margin: 0;
 	padding: 0;
 	padding-bottom: 5px
 }
 
 #med-input-form {
-}
-
-#med-input-button {
-	float: right;
-	position: relative;
-	top: -40px;
-	right: 7px;
+	margin: 15px 0;
 }
 
 .med-header {
@@ -122,6 +159,16 @@ ul {
 
 .med-item-inner {
 	padding: 20px 20px 0 20px;
+}
+
+.med-disabled {
+	background: #eee;
+	color: #ccc;
+	border: 1px #ddd solid;
+}
+
+.med-disabled .med-ingredient, .med-disabled .med-sig, .med-disabled .med-indication {
+	color: #ccc;
 }
 
 .med-ingredient {
@@ -216,23 +263,4 @@ ul {
 
 .med-note-item:hover .med-note-icon {
 	display: none;
-}
-
-/* EDIT-IN-PLACE STYLES */
-
-.edit-in-place input {
-	display: none;
-}
-
-.edit-in-place .save  {
-	display: none;
-}
-
-.edit-in-place.active span,
-.edit-in-place.active .edit {
-    display: none;
-}
-.edit-in-place.active input,
-.edit-in-place.active .save  {
-    display: inline-block;
 }
