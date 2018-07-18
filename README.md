@@ -15,8 +15,5 @@ User clicks edit and options appear.
 Editing an individual medication reveals inline editing forms.
 ![1](assets/capture3.png)
 
-An idea of the overall layout (ads were an eventual endpoint).
-![1](assets/capture4.png)
-
 A more recent version of the sidebar with future features of translating and sharing.
 ![1](assets/capture5.png)
